@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; base-uri 'self'; object-src 'none'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Панель управления сайтом — ГарантАвто</title>
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f4f6f9; --panel: #ffffff; --line: #e2e7ef; --text: #1a2230;
+      --dim: #667085; --accent: #3f6fb0; --accent-hov: #345c93; --green: #2f9e5c;
+      --red: #d1495b; --radius: 12px; --font: "Inter", -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.55; }
+    a { color: var(--accent); }
+
+    /* Верхняя панель */
+    .topbar {
+      position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid var(--line);
+      padding: 12px 20px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    }
+    .topbar .brand { font-weight: 800; font-size: 1.05rem; display: flex; align-items: center; gap: 8px; margin-right: auto; }
+    .topbar .brand .m { width: 30px; height: 30px; border-radius: 8px; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: 0.8rem; font-weight: 800; }
+    .status { font-size: 0.85rem; color: var(--dim); min-width: 150px; }
+    .status.saved { color: var(--green); }
+
+    .btn { border: none; border-radius: 9px; padding: 10px 16px; font-weight: 600; font-size: 0.92rem; cursor: pointer; font-family: var(--font); transition: all .15s; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-hov); }
+    .btn-line { background: #fff; border: 1px solid var(--line); color: var(--text); }
+    .btn-line:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-danger { background: #fff; border: 1px solid #f0c7cd; color: var(--red); }
+    .btn-danger:hover { background: #fdeef0; }
+    .btn-sm { padding: 6px 12px; font-size: 0.85rem; }
+
+    .wrap { max-width: 900px; margin: 0 auto; padding: 24px 20px 80px; }
+
+    .hello { background: #eaf1fb; border: 1px solid #d3e2f7; border-radius: var(--radius); padding: 18px 20px; margin-bottom: 24px; font-size: 0.94rem; }
+    .hello h1 { font-size: 1.25rem; margin-bottom: 8px; }
+    .hello ol { margin: 8px 0 0 20px; } .hello li { margin-bottom: 4px; }
+    .hello b { color: var(--accent); }
+
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; margin-bottom: 18px; }
+    .card > h2 { font-size: 1.1rem; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+    .card > .hint { color: var(--dim); font-size: 0.86rem; margin-bottom: 18px; }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } .topbar .status { min-width: 0; width: 100%; order: 5; } }
+
+    label.f { display: block; margin-bottom: 14px; }
+    label.f > span { display: block; font-size: 0.82rem; color: var(--dim); margin-bottom: 5px; font-weight: 500; }
+    input[type=text], input[type=tel], input[type=url], textarea {
+      width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 9px;
+      font-family: var(--font); font-size: 0.95rem; color: var(--text); background: #fff;
+    }
+    input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+    textarea { resize: vertical; min-height: 64px; }
+
+    .row-item { border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin-bottom: 12px; background: #fbfcfe; }
+    .row-item .row-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .row-item .row-head b { font-size: 0.9rem; color: var(--dim); }
+
+    .img-field { display: flex; gap: 14px; align-items: center; margin-bottom: 12px; }
+    .img-prev { width: 110px; height: 78px; border-radius: 8px; object-fit: cover; border: 1px solid var(--line); background: #eef1f6; flex-shrink: 0; }
+    .img-field .file-btn { position: relative; overflow: hidden; }
+    .img-field input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+    .add-btn { margin-top: 4px; }
+    .chips-hint { font-size: 0.82rem; color: var(--dim); margin-top: 6px; }
+    .save-toast {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--text); color: #fff; padding: 12px 22px; border-radius: 10px; font-size: 0.9rem;
+      opacity: 0; pointer-events: none; transition: all .25s; z-index: 100;
+    }
+    .save-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand"><img class="m" src="assets/logo.jpg" alt="ГарантАвто" style="object-fit:cover;background:#fff" /> Панель управления</div>
+    <div class="status" id="status">Загрузка…</div>
+    <button class="btn btn-line btn-sm" id="btnPreview">👁 Предпросмотр</button>
+    <button class="btn btn-line btn-sm" id="btnImport">📁 Загрузить файл</button>
+    <input type="file" id="importFile" accept="application/json,.json" hidden />
+    <button class="btn btn-primary" id="btnPublish">💾 Опубликовать (скачать content.json)</button>
+  </div>
+
+  <div class="wrap">
+    <div class="hello">
+      <h1>Здравствуйте! Это панель управления вашим сайтом 👋</h1>
+      <p>Здесь вы сами меняете тексты, цены и фотографии — без программиста. Всё просто:</p>
+      <ol>
+        <li>Меняете что нужно в полях ниже (сохраняется автоматически в этом браузере).</li>
+        <li>Нажимаете <b>«Предпросмотр»</b>, чтобы увидеть, как будет выглядеть сайт.</li>
+        <li>Нажимаете <b>«Опубликовать»</b> — скачается файл <b>content.json</b>.</li>
+        <li>Загружаете этот файл <b>content.json</b> в папку сайта на хостинге (заменяя старый) — и изменения видят все посетители.</li>
+      </ol>
+      <p style="margin-top:8px">💡 Фотографии можно загружать прямо здесь — они сохранятся внутри файла content.json, ничего отдельно грузить не нужно.</p>
+    </div>
+
+    <!-- Контакты -->
+    <div class="card">
+      <h2>📞 Контакты и общая информация</h2>
+      <p class="hint">Эти данные показываются в шапке, блоке контактов и подвале сайта.</p>
+      <div class="grid2">
+        <label class="f"><span>Телефон (как показывать)</span><input type="text" data-path="business.phone" /></label>
+        <label class="f"><span>Телефон для звонка (только цифры, с +)</span><input type="tel" data-path="business.phoneRaw" /></label>
+      </div>
+      <div class="grid2">
+        <label class="f"><span>Доп. телефон (как показывать)</span><input type="text" data-path="business.phone2" /></label>
+        <label class="f"><span>Доп. телефон для звонка (только цифры, с +)</span><input type="tel" data-path="business.phone2Raw" /></label>
+      </div>
+      <label class="f"><span>Адрес</span><input type="text" data-path="business.address" /></label>
+      <div class="grid2">
+        <label class="f"><span>Время работы</span><input type="text" data-path="business.hours" /></label>
+        <label class="f"><span>Метро</span><input type="text" data-path="business.metro" /></label>
+      </div>
+      <div class="grid2">
+        <label class="f"><span>Запчасти (например «В наличии и под заказ»)</span><input type="text" data-path="business.parts" /></label>
+        <label class="f"><span>Способы оплаты</span><input type="text" data-path="business.payment" /></label>
+      </div>
+      <label class="f"><span>Ссылка на Яндекс Карты</span><input type="url" data-path="business.yandexUrl" /></label>
+    </div>
+
+    <!-- Главный экран -->
+    <div class="card">
+      <h2>🏁 Главный экран (первое, что видит клиент)</h2>
+      <p class="hint">Заголовок, подзаголовок и большое фоновое фото вверху сайта.</p>
+      <div class="img-field">
+        <img class="img-prev" id="prev_hero" alt="фон" />
+        <div>
+          <button class="btn btn-line btn-sm file-btn">Заменить фото
+            <input type="file" accept="image/*" data-img="hero.image" />
+          </button>
+          <div class="chips-hint">Рекомендуется широкое фото авто/сервиса</div>
+        </div>
+      </div>
+      <label class="f"><span>Заголовок</span><input type="text" data-path="hero.title" /></label>
+      <label class="f"><span>Подзаголовок</span><textarea data-path="hero.lead"></textarea></label>
+      <div class="grid2">
+        <label class="f"><span>Цифра 1 (например 5,0)</span><input type="text" data-path="hero.stat1num" /></label>
+        <label class="f"><span>Подпись к цифре 1</span><input type="text" data-path="hero.stat1lbl" /></label>
+        <label class="f"><span>Цифра 2</span><input type="text" data-path="hero.stat2num" /></label>
+        <label class="f"><span>Подпись к цифре 2</span><input type="text" data-path="hero.stat2lbl" /></label>
+        <label class="f"><span>Цифра 3</span><input type="text" data-path="hero.stat3num" /></label>
+        <label class="f"><span>Подпись к цифре 3</span><input type="text" data-path="hero.stat3lbl" /></label>
+      </div>
+    </div>
+
+    <!-- О сервисе -->
+    <div class="card">
+      <h2>🛠 Блок «О сервисе»</h2>
+      <p class="hint">Фото слева и преимущества справа.</p>
+      <div class="img-field">
+        <img class="img-prev" id="prev_about" alt="о сервисе" />
+        <div>
+          <button class="btn btn-line btn-sm file-btn">Заменить фото
+            <input type="file" accept="image/*" data-img="about.image" />
+          </button>
+        </div>
+      </div>
+      <label class="f"><span>Заголовок</span><input type="text" data-path="about.title" /></label>
+      <label class="f"><span>Описание</span><textarea data-path="about.subtitle"></textarea></label>
+      <h3 style="font-size:0.95rem;margin:14px 0 8px">Преимущества (4 блока)</h3>
+      <div id="featuresList"></div>
+    </div>
+
+    <!-- Услуги и цены -->
+    <div class="card">
+      <h2>💰 Услуги и цены</h2>
+      <p class="hint">Каждая карточка на сайте — название, описание и цена. Можно добавлять и удалять.</p>
+      <div id="servicesList"></div>
+      <button class="btn btn-line btn-sm add-btn" id="addService">➕ Добавить услугу</button>
+    </div>
+
+    <!-- Галерея -->
+    <div class="card">
+      <h2>🖼 Галерея фотографий</h2>
+      <p class="hint">Фото вашего сервиса. Загрузите свои снимки и подпишите их.</p>
+      <div id="galleryList"></div>
+      <button class="btn btn-line btn-sm add-btn" id="addGallery">➕ Добавить фото</button>
+    </div>
+
+    <!-- Виды работ -->
+    <div class="card">
+      <h2>🔧 Все виды работ</h2>
+      <p class="hint">Список тегов внизу блока услуг. По одному в строке.</p>
+      <label class="f"><textarea id="worksArea" style="min-height:130px"></textarea></label>
+    </div>
+
+    <!-- Марки -->
+    <div class="card">
+      <h2>🚗 Марки автомобилей</h2>
+      <p class="hint">По одной марке в строке.</p>
+      <label class="f"><textarea id="brandsArea" style="min-height:130px"></textarea></label>
+    </div>
+
+    <!-- Отзывы -->
+    <div class="card">
+      <h2>⭐ Отзывы клиентов</h2>
+      <p class="hint">Можно добавлять и удалять отзывы.</p>
+      <div id="reviewsList"></div>
+      <button class="btn btn-line btn-sm add-btn" id="addReview">➕ Добавить отзыв</button>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
+      <button class="btn btn-primary" id="btnPublish2">💾 Опубликовать (скачать content.json)</button>
+      <button class="btn btn-line" id="btnPreview2">👁 Предпросмотр</button>
+      <button class="btn btn-danger" id="btnReset">↺ Сбросить к исходному</button>
+    </div>
+  </div>
+
+  <div class="save-toast" id="toast">Сохранено</div>
+
+  <script src="js/content.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

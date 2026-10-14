@@ -1,0 +1,15 @@
+.DS_Store
+.claude/
+
+# Old stock photos (replaced by authentic images)
+assets/hero.jpg
+assets/about.jpg
+assets/g1.jpg
+assets/g2.jpg
+assets/g3.jpg
+assets/g5.jpg
+assets/g6.jpg
+assets/g7.jpg
+
+# Original camera files (copied with semantic names)
+assets/IMG_*.jpg

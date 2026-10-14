@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Укажите реальный домен после публикации:
+# Sitemap: https://ваш-домен.ru/sitemap.xml

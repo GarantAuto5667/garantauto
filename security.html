@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; script-src 'self'; base-uri 'self'; object-src 'none'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="Политика безопасности автосервиса ГарантАвто: меры защиты данных пользователей и сайта." />
+  <title>Политика безопасности — ГарантАвто</title>
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a href="index.html" class="logo"><img class="logo-mark logo-img" src="assets/logo.jpg" alt="ГарантАвто" width="38" height="38" />Гарант<span>Авто</span></a>
+      <div class="nav-phone">
+        <a href="tel:+79265897327" class="phone">+7 (926) 589-73-27</a>
+        <a href="index.html#contacts" class="btn btn-primary">Записаться</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container legal">
+    <a href="index.html" class="back-link">← На главную</a>
+    <h1>Политика безопасности</h1>
+    <p class="updated">Дата последнего обновления: 28 сентября 2026 г.</p>
+
+    <p>Мы серьёзно относимся к безопасности данных наших клиентов и работоспособности сайта автосервиса «ГарантАвто». На этой странице описаны меры, которые мы применяем для защиты информации.</p>
+
+    <h2>1. Защита передаваемых данных</h2>
+    <ul>
+      <li>Сайт предназначен для работы по защищённому протоколу <strong>HTTPS</strong> (шифрование TLS) — данные форм передаются в зашифрованном виде.</li>
+      <li>Мы рекомендуем при размещении сайта включить принудительное перенаправление с HTTP на HTTPS и заголовок <code>Strict-Transport-Security (HSTS)</code>.</li>
+    </ul>
+
+    <h2>2. Минимизация данных</h2>
+    <p>Мы запрашиваем только минимально необходимый набор данных (имя и телефон) и не собираем платёжные реквизиты, паспортные данные или иные чувствительные сведения через сайт.</p>
+
+    <h2>3. Защита от типовых веб-угроз</h2>
+    <ul>
+      <li><strong>Content Security Policy (CSP)</strong> — ограничивает источники загрузки скриптов, стилей и фреймов, снижая риск XSS-атак.</li>
+      <li><strong>Referrer-Policy</strong> — ограничивает передачу реферера сторонним ресурсам.</li>
+      <li>Внешние ссылки открываются с атрибутами <code>rel="noopener noreferrer"</code> для защиты от подмены вкладки (tabnabbing).</li>
+      <li>Формы содержат валидацию вводимых данных и ограничение длины полей.</li>
+      <li>На сайте не используются сторонние рекламные и трекинговые скрипты.</li>
+    </ul>
+
+    <h2>4. Рекомендуемые серверные меры</h2>
+    <p>При развёртывании сайта на хостинге мы рекомендуем настроить следующие HTTP-заголовки безопасности:</p>
+    <ul>
+      <li><code>Strict-Transport-Security: max-age=31536000; includeSubDomains</code></li>
+      <li><code>X-Content-Type-Options: nosniff</code></li>
+      <li><code>X-Frame-Options: SAMEORIGIN</code></li>
+      <li><code>Referrer-Policy: strict-origin-when-cross-origin</code></li>
+      <li><code>Permissions-Policy</code> — ограничение доступа к камере, микрофону, геолокации.</li>
+    </ul>
+    <p>Пример конфигурации приведён в файле проекта <code>materials</code> / документации (см. README).</p>
+
+    <h2>5. Обработка заявок</h2>
+    <p>Заявки, поступающие через форму, обрабатываются уполномоченными сотрудниками сервиса и не передаются третьим лицам, кроме случаев, предусмотренных законодательством. Подробнее — в <a href="privacy.html">Политике конфиденциальности</a>.</p>
+
+    <h2>6. Обновление и поддержка</h2>
+    <p>Мы своевременно обновляем программное обеспечение сайта и хостинга, устраняя известные уязвимости.</p>
+
+    <h2>7. Сообщение об уязвимости</h2>
+    <p>Если вы обнаружили уязвимость или проблему безопасности на нашем сайте, пожалуйста, сообщите нам по телефону <a href="tel:+79265897327">+7 (926) 589-73-27</a>. Мы благодарны за ответственное раскрытие информации.</p>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none;">
+        <div>© 2026 ГарантАвто. Все права защищены.</div>
+        <div>
+          <a href="privacy.html">Политика конфиденциальности</a> ·
+          <a href="security.html">Политика безопасности</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
