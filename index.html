@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; frame-src https://yandex.ru https://*.yandex.ru; form-action 'self'; base-uri 'self'; object-src 'none'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'; connect-src 'self'; frame-src https://yandex.ru https://*.yandex.ru; form-action 'self'; base-uri 'self'; object-src 'none'" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="description" content="ГарантАвто — автосервис и автотехцентр в Москве на Люблинской, 1. Ремонт китайских, корейских, японских и европейских авто. Замена ГРМ, ремонт АКПП, ходовой, ТО, развал-схождение. Рейтинг 5,0 на Яндекс Картах." />
   <meta name="theme-color" content="#eeedf5" />
@@ -12,9 +12,7 @@
   <meta property="og:type" content="website" />
   <title>ГарантАвто — автосервис и автотехцентр в Москве | Люблинская, 1</title>
   <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -155,7 +153,7 @@
       <div class="section-head">
         <span class="eyebrow">Контакты</span>
         <h2>Записаться на ремонт</h2>
-        <p>Позвоните нам или оставьте заявку — перезвоним и согласуем удобное время.</p>
+        <p>Позвоните нам — подскажем по ремонту и согласуем удобное время записи.</p>
       </div>
       <div class="contacts-grid">
         <div class="contact-card">
@@ -178,28 +176,10 @@
         </div>
 
         <div class="form-card">
-          <h3>Оставить заявку</h3>
-          <p class="sub">Заполните форму — мы свяжемся с вами для записи.</p>
-          <form id="leadForm" novalidate>
-            <div class="field">
-              <label for="name">Ваше имя</label>
-              <input type="text" id="name" name="name" autocomplete="name" required maxlength="80" />
-            </div>
-            <div class="field">
-              <label for="phone">Телефон</label>
-              <input type="tel" id="phone" name="phone" autocomplete="tel" required maxlength="20" placeholder="+7 (___) ___-__-__" />
-            </div>
-            <div class="field">
-              <label for="comment">Что нужно сделать? (необязательно)</label>
-              <textarea id="comment" name="comment" maxlength="500" placeholder="Марка авто и описание проблемы"></textarea>
-            </div>
-            <label class="consent">
-              <input type="checkbox" id="consent" required />
-              <span>Я согласен на обработку персональных данных в соответствии с <a href="privacy.html">Политикой конфиденциальности</a>.</span>
-            </label>
-            <button type="submit" class="btn btn-primary btn-block">Отправить заявку</button>
-            <div class="form-msg" id="formMsg">Спасибо! Заявка отправлена. Мы перезвоним вам в ближайшее время.</div>
-          </form>
+          <h3>Запись по телефону</h3>
+          <p class="sub">Расскажите о проблеме и марке автомобиля — подскажем, что нужно, назовём ориентировочные сроки и согласуем удобное время.</p>
+          <a href="tel:+79265897327" class="btn btn-primary btn-block" data-bind="phoneLink phoneBtn">Позвонить: +7 (926) 589-73-27</a>
+          <p class="sub call-alt">Второй номер: <a href="tel:+79268533265" data-bind="phone2Link phone2">+7 (926) 853-32-65</a></p>
         </div>
       </div>
 
@@ -256,7 +236,7 @@
           <a href="privacy.html">Политика конфиденциальности</a> ·
           <a href="security.html">Политика безопасности</a>
         </div>
-        <div class="footer-credit">Сайт — <a href="https://vertostudio.ru" target="_blank" rel="noopener noreferrer">Verto Studio</a></div>
+        <div class="footer-credit">Нужен сайт? — <a href="https://vertostudio.ru" target="_blank" rel="noopener noreferrer">Verto Studio</a></div>
       </div>
     </div>
   </footer>

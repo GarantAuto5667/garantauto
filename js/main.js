@@ -201,26 +201,6 @@
       });
     }
 
-    // Форма заявки. ВНИМАНИЕ: статический сайт без бэкенда — данные никуда
-    // не отправляются автоматически. Подключите серверный обработчик (см. README).
-    var form = document.getElementById('leadForm');
-    var msg = document.getElementById('formMsg');
-    if (form) {
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var name = form.name.value.trim();
-        var phone = form.phone.value.trim();
-        var consent = document.getElementById('consent').checked;
-        if (name.length < 2) { alert('Пожалуйста, укажите ваше имя.'); form.name.focus(); return; }
-        if (phone.replace(/\D/g, '').length < 10) { alert('Пожалуйста, укажите корректный номер телефона.'); form.phone.focus(); return; }
-        if (!consent) { alert('Необходимо согласие на обработку персональных данных.'); return; }
-        if (msg) {
-          msg.classList.add('ok');
-          msg.textContent = 'Спасибо! Заявка принята. Мы перезвоним вам в ближайшее время.';
-        }
-        form.reset();
-      });
-    }
   }
 
   // --- Старт ---
