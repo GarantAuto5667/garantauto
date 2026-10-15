@@ -264,9 +264,8 @@ img.logo-mark { display: block; }
   color: var(--accent); font-weight: 600; font-size: 0.88rem;
 }
 
-/* Automotive-themed background pattern (scattered icons, Max-style) */
-body::after {
-  content: "";
+/* Automotive-themed background pattern (scattered icons, Max-style — fixed) */
+.bg-pattern {
   position: fixed; inset: 0;
   z-index: 90; /* above content, below header (100) */
   pointer-events: none;
